@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANGREZI HERO V15</title>
+<style>
+:root{--neon:#00ff41;--danger:#ff003c;--gold:#ffea00;--bg:#050505;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:#fff;font-family:'Segoe UI',sans-serif;user-select:none;overflow-x:hidden;}
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* HEADER */
+.hdr{text-align:center;padding:28px 10px 12px;}
+.hdr-name{font-size:32px;font-weight:900;letter-spacing:5px;color:#fff;text-transform:uppercase;
+  text-shadow:2px 2px var(--danger),-2px -2px var(--neon),0 0 20px var(--neon);animation:glitch 1.8s infinite;}
+@keyframes glitch{0%{transform:skew(0deg)}20%{transform:skew(-3deg);text-shadow:2px 2px var(--neon),-2px -2px var(--danger)}40%{transform:skew(3deg)}100%{transform:skew(0deg)}}
+.hdr-sub{color:var(--gold);font-size:10px;letter-spacing:4px;margin-top:4px;}
+
+/* GLASS CARD */
+.card{max-width:400px;margin:0 auto 18px;background:rgba(255,255,255,0.025);border:1px solid rgba(0,255,65,0.18);border-radius:22px;padding:24px;backdrop-filter:blur(15px);}
+
+/* ===== JOIN PAGE ===== */
+.join-hero{text-align:center;padding:10px 20px 20px;max-width:400px;margin:0 auto;}
+.join-img{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin:0 auto 14px;display:block;background:linear-gradient(135deg,#1a1a1a,#0d0d0d);font-size:50px;line-height:90px;text-align:center;}
+.join-big{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--gold);margin-bottom:6px;}
+.join-sm{font-size:12px;color:#888;line-height:1.8;margin-bottom:18px;}
+.step-wrap{text-align:left;margin-bottom:18px;}
+.step{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:13px;color:#ccc;}
+.step-num{background:var(--neon);color:#000;border-radius:50%;width:22px;height:22px;min-width:22px;font-size:11px;font-weight:900;line-height:22px;text-align:center;}
+.tg-btn{display:block;width:100%;padding:14px;background:linear-gradient(45deg,#0088cc,#005fa3);border:none;border-radius:13px;color:#fff;font-weight:900;font-size:14px;letter-spacing:2px;cursor:pointer;text-decoration:none;text-align:center;margin-bottom:8px;}
+.ref-box{background:rgba(255,234,0,0.04);border:1px dashed var(--gold);border-radius:14px;padding:14px 18px;margin-bottom:10px;text-align:center;}
+.ref-title{font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:8px;}
+.ref-btn{display:block;padding:12px;background:linear-gradient(45deg,#ff6600,#cc3300);border-radius:10px;color:#fff;font-weight:900;font-size:13px;text-decoration:none;letter-spacing:1px;}
+.skip-btn{width:100%;padding:11px;background:transparent;border:1px solid #2a2a2a;border-radius:10px;color:#555;font-size:12px;cursor:pointer;letter-spacing:1px;margin-top:6px;transition:all .2s;}
+.skip-btn:hover{border-color:var(--neon);color:var(--neon);}
+.admin-contact{text-align:center;font-size:11px;color:#333;padding:10px 0 20px;}
+.admin-contact a{color:var(--neon);text-decoration:none;}
+
+/* ===== LOGIN PAGE ===== */
+.login-hero{text-align:center;padding:10px 0 20px;}
+.login-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#111,#1a1a00);border:2px solid var(--gold);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:38px;}
+.login-title{font-size:16px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:4px;}
+.login-sub{font-size:11px;color:#555;letter-spacing:1px;}
+.inp-label{font-size:10px;color:#888;letter-spacing:2px;display:block;margin-bottom:5px;}
+.inp{width:100%;padding:13px 15px;background:rgba(255,255,255,0.04);border:1px solid rgba(0,255,65,0.25);border-radius:10px;color:#fff;font-size:14px;outline:none;margin-bottom:14px;}
+.inp:focus{border-color:var(--neon);box-shadow:0 0 8px rgba(0,255,65,0.15);}
+.btn-login{width:100%;padding:14px;background:linear-gradient(45deg,var(--neon),#008f11);border:none;border-radius:12px;color:#000;font-weight:900;font-size:14px;letter-spacing:2px;cursor:pointer;text-transform:uppercase;margin-bottom:8px;}
+.err{color:var(--danger);font-size:12px;text-align:center;min-height:18px;margin-bottom:6px;}
+.contact-hint{font-size:11px;color:#444;text-align:center;margin-top:10px;}
+.contact-hint a{color:var(--neon);text-decoration:none;}
+
+/* ===== APP PAGE ===== */
+.session-bar-wrap{max-width:400px;margin:0 auto 4px;padding:0 5px;}
+.session-info{display:flex;justify-content:space-between;font-size:11px;color:#555;margin-bottom:5px;}
+.session-info span{color:var(--gold);}
+.timer-bar{background:#111;border-radius:5px;height:5px;overflow:hidden;margin-bottom:12px;max-width:400px;margin-left:auto;margin-right:auto;}
+.timer-fill{height:100%;background:linear-gradient(90deg,var(--neon),#008f11);transition:width 1s linear;}
+.pred-val{font-size:55px;font-weight:900;margin:10px 0;text-shadow:0 0 20px var(--neon);}
+.period-txt{color:#888;font-size:13px;}
+.opp-box{color:var(--gold);font-size:13px;font-weight:700;border:1px dashed var(--gold);padding:9px;border-radius:8px;margin-top:8px;}
+table{width:100%;margin-top:18px;border-collapse:collapse;font-size:11px;}
+th{color:#555;border-bottom:1px solid #1a1a1a;padding:8px;letter-spacing:1px;}
+td{padding:10px;border-bottom:1px solid #0d0d0d;text-align:center;}
+.win{color:var(--neon);font-weight:700;}
+.loss{color:var(--danger);font-weight:700;}
+.logout-btn{display:block;max-width:400px;margin:0 auto 30px;padding:10px;background:transparent;border:1px solid #1a1a1a;border-radius:10px;color:#333;font-size:11px;cursor:pointer;letter-spacing:1px;width:calc(100% - 30px);}
+.logout-btn:hover{border-color:var(--danger);color:var(--danger);}
+.footer-tg{text-align:center;font-size:11px;color:#2a2a2a;padding-bottom:20px;}
+.footer-tg a{color:#333;text-decoration:none;}
+</style>
+</head>
+<body oncontextmenu="return false;">
+
+<!-- ========== PAGE 1: JOIN ========== -->
+<div id="joinPage" class="page active">
+  <div class="hdr">
+    <div class="hdr-name">ANGREZI HERO</div>
+    <div class="hdr-sub">GLOBAL EDITION V15</div>
+  </div>
+
+  <div class="join-hero">
+    <!-- Profile image placeholder — replace src with real image URL -->
+    <div class="join-img">🎯</div>
+    <div class="join-big">UNLOCK THIS WEBSITE</div>
+    <div class="join-sm">এই ওয়েব ব্যবহার করতে নিচের ধাপগুলো অনুসরণ করুন।<br><strong style="color:var(--gold)">সম্পূর্ণ ফ্রি!</strong></div>
+
+    <div class="step-wrap">
+      <div class="step"><div class="step-num">১</div><div>টেলিগ্রাম চ্যানেলে <strong style="color:var(--neon)">Join</strong> করুন</div></div>
+      <div class="step"><div class="step-num">২</div><div>আমার Refer Link দিয়ে <strong style="color:var(--gold)">Account</strong> খুলুন</div></div>
+      <div class="step"><div class="step-num">৩</div><div>Admin এর কাছ থেকে <strong style="color:var(--danger)">Password</strong> নিন</div></div>
+    </div>
+
+    <a href="https://t.me/+AwKPRGkaz1c1NTE1" target="_blank" class="tg-btn">
+      📢 টেলিগ্রাম চ্যানেলে Join করুন
+    </a>
+    <button class="skip-btn" onclick="goLogin()">✅ Join করা হয়েছে — পরের ধাপ</button>
+
+    <div style="height:14px;"></div>
+
+    <div class="ref-box">
+      <div class="ref-title">🎯 রেফার লিংক দিয়ে Account খুলুন</div>
+      <a href="https://22bdwin24.com/register?inviteCode=REK7REN&from=web" target="_blank" class="ref-btn">
+        Account খুলুন (Refer Link)
+      </a>
+      <div style="font-size:10px;color:#555;margin-top:8px;">Account থাকলে এই ধাপ Skip করুন</div>
+    </div>
+
+    <button class="skip-btn" onclick="goLogin()">⏭️ সব হয়ে গেছে — Login করুন</button>
+  </div>
+
+  <div class="admin-contact">
+    যোগাযোগ: <a href="https://t.me/Trader_Pram" target="_blank">@Trader_Pram</a>
+  </div>
+</div>
+
+<!-- ========== PAGE 2: LOGIN ========== -->
+<div id="loginPage" class="page">
+  <div class="hdr">
+    <div class="hdr-name">ANGREZI HERO</div>
+    <div class="hdr-sub">USER LOGIN</div>
+  </div>
+
+  <div class="card">
+    <div class="login-hero">
+      <div class="login-avatar">🔐</div>
+      <div class="login-title">@TRADER_PRAM</div>
+      <div class="login-sub">Admin এর দেওয়া credentials দিয়ে login করুন</div>
+    </div>
+    <label class="inp-label">USERNAME</label>
+    <input class="inp" type="text" id="lUser" placeholder="Username দিন" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
+    <label class="inp-label">PASSWORD</label>
+    <input class="inp" type="password" id="lPass" placeholder="Password দিন" onkeydown="if(event.key==='Enter')doLogin()">
+    <div class="err" id="lErr"></div>
+    <button class="btn-login" onclick="doLogin()">🚀 LOGIN</button>
+    <div class="contact-hint">Password নেই? Admin: <a href="https://t.me/Trader_Pram" target="_blank">@Trader_Pram</a></div>
+  </div>
+</div>
+
+<!-- ========== PAGE 3: APP ========== -->
+<div id="appPage" class="page">
+  <div class="hdr">
+    <div class="hdr-name">ANGREZI HERO</div>
+    <div class="hdr-sub">GLOBAL EDITION V15</div>
+  </div>
+
+  <div class="session-bar-wrap">
+    <div class="session-info">
+      <span id="sUser">---</span>
+      <span id="sTimer">---</span>
+    </div>
+  </div>
+  <div class="timer-bar"><div class="timer-fill" id="tFill" style="width:100%"></div></div>
+
+  <div class="card" style="text-align:center;">
+    <div class="period-txt" id="pID">PERIOD: ---</div>
+    <div class="pred-val" id="pRes">WAIT...</div>
+    <div class="opp-box" id="pOpps">SYNCING...</div>
+    <table>
+      <thead><tr><th>PRD</th><th>PRED</th><th>NUM</th><th>STATUS</th></tr></thead>
+      <tbody id="logs"></tbody>
+    </table>
+  </div>
+
+  <button class="logout-btn" onclick="doLogout()">🚪 Logout</button>
+  <div class="footer-tg"><a href="https://t.me/Trader_Pram" target="_blank">@Trader_Pram</a></div>
+</div>
+
+<script>
+// ── IMPORTANT: এই KEY টি Admin site এর STORE_KEY এর মতো হতে হবে ──
+const STORE_KEY = "ah_users_v2";
+
+function getUsers(){try{return JSON.parse(localStorage.getItem(STORE_KEY))||{};}catch(e){return{};}}
+function isExp(u){return Date.now()>u.expiry;}
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function goLogin(){ showPage('loginPage'); }
+
+// ── LOGIN ──
+function doLogin(){
+  const u=document.getElementById('lUser').value.trim();
+  const p=document.getElementById('lPass').value.trim();
+  const e=document.getElementById('lErr');
+  e.textContent='';
+  if(!u||!p){e.textContent='⚠️ Username ও Password দিন';return;}
+  const users=getUsers();
+  if(!users[u]){e.textContent='❌ User পাওয়া যায়নি। Admin: @Trader_Pram';return;}
+  if(users[u].password!==p){e.textContent='❌ Password ভুল!';return;}
+  if(isExp(users[u])){e.textContent='⏰ মেয়াদ শেষ। Admin এর সাথে যোগাযোগ করুন।';return;}
+  sessionStorage.setItem('ah_u',u);
+  startApp(u,users[u].expiry);
+}
+
+function doLogout(){
+  sessionStorage.removeItem('ah_u');
+  clearInterval(window._app);
+  clearInterval(window._timer);
+  window.lastId=null;
+  document.getElementById('logs').innerHTML='';
+  showPage('loginPage');
+  document.getElementById('lUser').value='';
+  document.getElementById('lPass').value='';
+  document.getElementById('lErr').textContent='';
+}
+
+// ── SESSION TIMER ──
+function startTimer(expiry){
+  const total=expiry-Date.now();
+  function tick(){
+    const left=Math.max(0,expiry-Date.now());
+    if(left===0){
+      clearInterval(window._timer);
+      clearInterval(window._app);
+      alert('⏰ আপনার session শেষ হয়ে গেছে। Admin এর সাথে যোগাযোগ করুন।');
+      doLogout(); return;
+    }
+    const h=Math.floor(left/3600000);
+    const m=Math.floor((left%3600000)/60000);
+    const s=Math.floor((left%60000)/1000);
+    document.getElementById('sTimer').textContent=`⏳ ${h}h ${m}m ${s}s`;
+    document.getElementById('tFill').style.width=Math.max(0,(left/total)*100)+'%';
+  }
+  tick();
+  window._timer=setInterval(tick,1000);
+}
+
+// ── APP LOGIC ──
+const BIG=[5,6,7,8,9],SMALL=[0,1,2,3,4];
+let curOpp=[];
+
+function startApp(username,expiry){
+  showPage('appPage');
+  document.getElementById('sUser').textContent='👤 '+username;
+  startTimer(expiry);
+  window.lastId=null;
+  document.getElementById('logs').innerHTML='';
+  document.getElementById('pRes').textContent='WAIT...';
+  document.getElementById('pOpps').textContent='SYNCING...';
+  document.getElementById('pID').textContent='PERIOD: ---';
+  clearInterval(window._app);
+  window._app=setInterval(async()=>{
+    try{
+      const res=await fetch('https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json');
+      const json=await res.json();
+      const latest=json.data.list[0];
+      const trend=json.data.list.slice(0,3).map(x=>parseInt(x.number)>=5?"BIG":"SMALL");
+      const nextPred=trend.filter(x=>x==="BIG").length>1?"BIG":"SMALL";
+      if(window.lastId!==latest.issueNumber){
+        const actualSize=parseInt(latest.number)>=5?"BIG":"SMALL";
+        let check=window.savedPred||nextPred;
+        const same=check==="BIG"?BIG:SMALL;
+        const opp=check==="BIG"?SMALL:BIG;
+        const n1=same[Math.floor(Math.random()*same.length)];
+        const n2=opp[Math.floor(Math.random()*opp.length)];
+        curOpp=[n1,n2];
+        if(window.lastId){
+          const win=(check===actualSize)||window.savedOpp.includes(parseInt(latest.number));
+          const row=`<tr><td>${latest.issueNumber.slice(-3)}</td><td>${check}</td><td>${latest.number}</td><td class="${win?'win':'loss'}">${win?'WIN ✅':'LOSS ❌'}</td></tr>`;
+          document.getElementById('logs').innerHTML=row+document.getElementById('logs').innerHTML;
+        }
+        window.lastId=latest.issueNumber;
+        window.savedPred=nextPred;
+        window.savedOpp=curOpp;
+      }
+      document.getElementById('pID').innerText="PERIOD: "+(BigInt(latest.issueNumber)+1n).toString();
+      document.getElementById('pRes').innerText=nextPred;
+      document.getElementById('pOpps').innerText="NUMBERS: "+curOpp.join(", ");
+    }catch(e){}
+  },3000);
+}
+
+// ── AUTO LOGIN CHECK ──
+window.onload=()=>{
+  const saved=sessionStorage.getItem('ah_u');
+  if(saved){
+    const users=getUsers();
+    if(users[saved]&&!isExp(users[saved])){
+      startApp(saved,users[saved].expiry); return;
+    } else { sessionStorage.removeItem('ah_u'); }
+  }
+};
+</script>
+</body>
+</html>

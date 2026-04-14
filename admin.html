@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADMIN PANEL — @Trader_Pram</title>
+<style>
+:root{--neon:#00ff41;--danger:#ff003c;--gold:#ffea00;--bg:#050505;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:#fff;font-family:'Segoe UI',sans-serif;min-height:100vh;user-select:none;}
+
+/* LOGIN SCREEN */
+#loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;}
+.lock-icon{font-size:70px;margin-bottom:20px;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{text-shadow:0 0 10px var(--gold)}50%{text-shadow:0 0 30px var(--gold),0 0 60px var(--gold)}}
+.admin-title{font-size:28px;font-weight:900;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:5px;}
+.admin-sub{font-size:11px;color:#555;letter-spacing:3px;margin-bottom:40px;}
+.login-box{width:100%;max-width:360px;background:rgba(255,234,0,0.03);border:1px solid rgba(255,234,0,0.2);border-radius:20px;padding:30px;}
+.inp-label{font-size:10px;color:#888;letter-spacing:2px;display:block;margin-bottom:6px;}
+.inp{width:100%;padding:13px 15px;background:rgba(255,255,255,0.04);border:1px solid #333;border-radius:10px;color:#fff;font-size:15px;outline:none;margin-bottom:18px;}
+.inp:focus{border-color:var(--gold);box-shadow:0 0 10px rgba(255,234,0,0.15);}
+.btn-gold{width:100%;padding:14px;background:linear-gradient(45deg,var(--gold),#cc9900);border:none;border-radius:12px;color:#000;font-weight:900;font-size:14px;letter-spacing:2px;cursor:pointer;text-transform:uppercase;}
+.err{color:var(--danger);font-size:12px;text-align:center;margin-top:10px;min-height:18px;}
+.tg-link{text-align:center;margin-top:20px;font-size:11px;color:#444;}
+.tg-link a{color:var(--neon);text-decoration:none;}
+
+/* ADMIN DASHBOARD */
+#dashboard{display:none;padding:15px;}
+.dash-header{text-align:center;padding:20px 10px 10px;}
+.dash-title{font-size:26px;font-weight:900;letter-spacing:5px;color:var(--gold);animation:glitch 2s infinite;}
+@keyframes glitch{0%{transform:skew(0deg)}20%{transform:skew(-2deg);color:var(--neon)}40%{transform:skew(2deg)}100%{transform:skew(0deg);color:var(--gold)}}
+.dash-sub{font-size:10px;color:#555;letter-spacing:3px;margin-top:4px;}
+
+.card{max-width:440px;margin:0 auto 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:22px;}
+.card-title{font-size:13px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:18px;border-bottom:1px solid #1a1a1a;padding-bottom:10px;}
+
+.radio-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.r-opt{flex:1;min-width:70px;}
+.r-opt input{display:none;}
+.r-opt label{display:block;padding:10px 5px;border:1px solid #2a2a2a;border-radius:8px;text-align:center;font-size:12px;cursor:pointer;color:#666;transition:all .2s;}
+.r-opt input:checked+label{border-color:var(--gold);color:var(--gold);background:rgba(255,234,0,0.06);}
+
+.btn-create{width:100%;padding:13px;background:linear-gradient(45deg,var(--neon),#008f11);border:none;border-radius:10px;color:#000;font-weight:900;font-size:13px;letter-spacing:2px;cursor:pointer;text-transform:uppercase;}
+.success-msg{color:var(--neon);font-size:12px;text-align:center;margin-top:8px;min-height:18px;}
+
+/* USER LIST */
+.u-item{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(255,255,255,0.02);border:1px solid #1a1a1a;border-radius:12px;margin-bottom:8px;}
+.u-left .u-name{color:var(--neon);font-weight:700;font-size:13px;margin-bottom:3px;}
+.u-left .u-pass{color:#888;font-size:11px;margin-bottom:3px;}
+.u-left .u-time{font-size:10px;}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:9px;font-weight:800;letter-spacing:1px;margin-right:4px;}
+.b-active{background:rgba(0,255,65,0.1);color:var(--neon);border:1px solid var(--neon);}
+.b-expired{background:rgba(255,0,60,0.1);color:var(--danger);border:1px solid var(--danger);}
+.del-btn{background:var(--danger);border:none;color:#fff;border-radius:7px;padding:6px 12px;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:1px;}
+.empty{text-align:center;color:#333;font-size:12px;padding:25px;}
+.logout-btn{display:block;max-width:440px;margin:0 auto 30px;padding:11px;background:transparent;border:1px solid #222;border-radius:10px;color:#444;font-size:12px;cursor:pointer;letter-spacing:1px;width:100%;}
+.logout-btn:hover{border-color:var(--danger);color:var(--danger);}
+.stats-row{display:flex;gap:10px;max-width:440px;margin:0 auto 15px;}
+.stat-box{flex:1;background:rgba(255,255,255,0.02);border:1px solid #1a1a1a;border-radius:12px;padding:12px;text-align:center;}
+.stat-num{font-size:26px;font-weight:900;color:var(--gold);}
+.stat-label{font-size:9px;color:#555;letter-spacing:1px;margin-top:2px;}
+</style>
+</head>
+<body>
+
+<!-- ===== ADMIN LOGIN ===== -->
+<div id="loginScreen">
+  <div class="lock-icon">🛡️</div>
+  <div class="admin-title">ADMIN PANEL</div>
+  <div class="admin-sub">@TRADER_PRAM</div>
+  <div class="login-box">
+    <label class="inp-label">ADMIN PASSWORD</label>
+    <input class="inp" type="password" id="aPass" placeholder="Password দিন" onkeydown="if(event.key==='Enter')doAdminLogin()">
+    <button class="btn-gold" onclick="doAdminLogin()">🔓 LOGIN</button>
+    <div class="err" id="aErr"></div>
+  </div>
+  <div class="tg-link">Admin: <a href="https://t.me/Trader_Pram" target="_blank">@Trader_Pram</a></div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="dashboard">
+  <div class="dash-header">
+    <div class="dash-title">⚙️ ADMIN</div>
+    <div class="dash-sub">MASTER CONTROL — @TRADER_PRAM</div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-label">TOTAL USERS</div></div>
+    <div class="stat-box"><div class="stat-num" id="statActive" style="color:var(--neon)">0</div><div class="stat-label">ACTIVE</div></div>
+    <div class="stat-box"><div class="stat-num" id="statExpired" style="color:var(--danger)">0</div><div class="stat-label">EXPIRED</div></div>
+  </div>
+
+  <!-- Create User -->
+  <div class="card">
+    <div class="card-title">➕ নতুন USER তৈরি করুন</div>
+    <label class="inp-label">USERNAME</label>
+    <input class="inp" type="text" id="nUser" placeholder="Username দিন" autocomplete="off">
+    <label class="inp-label">PASSWORD</label>
+    <input class="inp" type="text" id="nPass" placeholder="Password দিন" autocomplete="off">
+    <label class="inp-label" style="margin-bottom:8px;">মেয়াদ (DURATION)</label>
+    <div class="radio-row">
+      <div class="r-opt"><input type="radio" name="dur" id="d1" value="1"><label for="d1">১ ঘণ্টা</label></div>
+      <div class="r-opt"><input type="radio" name="dur" id="d2" value="2" checked><label for="d2">২ ঘণ্টা</label></div>
+      <div class="r-opt"><input type="radio" name="dur" id="d6" value="6"><label for="d6">৬ ঘণ্টা</label></div>
+      <div class="r-opt"><input type="radio" name="dur" id="d12" value="12"><label for="d12">১২ ঘণ্টা</label></div>
+      <div class="r-opt"><input type="radio" name="dur" id="d24" value="24"><label for="d24">২৪ ঘণ্টা</label></div>
+    </div>
+    <div class="err" id="cErr"></div>
+    <button class="btn-create" onclick="createUser()">✅ USER তৈরি করুন</button>
+    <div class="success-msg" id="cOk"></div>
+  </div>
+
+  <!-- User List -->
+  <div class="card">
+    <div class="card-title">👥 USER LIST</div>
+    <div id="userList"><div class="empty">কোনো User নেই</div></div>
+  </div>
+
+  <button class="logout-btn" onclick="adminLogout()">🚪 Logout</button>
+</div>
+
+<script>
+const ADMIN_PASS = "Trader_Pram_2025";
+const STORE_KEY = "ah_users_v2";
+
+function getUsers(){try{return JSON.parse(localStorage.getItem(STORE_KEY))||{};}catch(e){return{};}}
+function saveUsers(u){localStorage.setItem(STORE_KEY,JSON.stringify(u));}
+function isExp(u){return Date.now()>u.expiry;}
+
+function doAdminLogin(){
+  const p=document.getElementById('aPass').value.trim();
+  const e=document.getElementById('aErr');
+  if(p===ADMIN_PASS){
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    renderAll();
+  } else {
+    e.textContent='❌ Password ভুল!';
+    setTimeout(()=>e.textContent='',2000);
+  }
+}
+
+function adminLogout(){
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('aPass').value='';
+}
+
+function createUser(){
+  const u=document.getElementById('nUser').value.trim();
+  const p=document.getElementById('nPass').value.trim();
+  const dur=parseInt(document.querySelector('input[name="dur"]:checked').value);
+  const ce=document.getElementById('cErr');
+  const ok=document.getElementById('cOk');
+  ce.textContent=''; ok.textContent='';
+  if(!u||!p){ce.textContent='⚠️ Username ও Password দিন';return;}
+  const users=getUsers();
+  const expiry=Date.now()+dur*3600000;
+  users[u]={password:p,expiry,duration:dur,created:Date.now()};
+  saveUsers(users);
+  document.getElementById('nUser').value='';
+  document.getElementById('nPass').value='';
+  ok.textContent=`✅ "${u}" তৈরি হয়েছে! মেয়াদ: ${dur} ঘণ্টা`;
+  setTimeout(()=>ok.textContent='',3000);
+  renderAll();
+}
+
+function deleteUser(u){
+  if(!confirm(`"${u}" কে delete করবেন?`))return;
+  const users=getUsers();
+  delete users[u];
+  saveUsers(users);
+  renderAll();
+}
+
+function renderAll(){
+  const users=getUsers();
+  const keys=Object.keys(users);
+  const active=keys.filter(k=>!isExp(users[k])).length;
+  const expired=keys.length-active;
+  document.getElementById('statTotal').textContent=keys.length;
+  document.getElementById('statActive').textContent=active;
+  document.getElementById('statExpired').textContent=expired;
+
+  const container=document.getElementById('userList');
+  if(keys.length===0){container.innerHTML='<div class="empty">কোনো User নেই। নতুন User তৈরি করুন।</div>';return;}
+  // Sort: active first
+  keys.sort((a,b)=>{
+    const ea=isExp(users[a]),eb=isExp(users[b]);
+    if(ea&&!eb)return 1;if(!ea&&eb)return -1;return users[b].created-users[a].created;
+  });
+  container.innerHTML=keys.map(u=>{
+    const usr=users[u];
+    const exp=isExp(usr);
+    const left=Math.max(0,usr.expiry-Date.now());
+    const h=Math.floor(left/3600000);
+    const m=Math.floor((left%3600000)/60000);
+    const timeStr=exp?'⏰ মেয়াদ শেষ':`⏳ ${h}h ${m}m বাকি`;
+    const badge=exp?'<span class="badge b-expired">EXPIRED</span>':'<span class="badge b-active">ACTIVE</span>';
+    return `<div class="u-item">
+      <div class="u-left">
+        <div class="u-name">👤 ${u}</div>
+        <div class="u-pass">🔑 ${usr.password}</div>
+        <div class="u-time">${badge}${timeStr}</div>
+      </div>
+      <button class="del-btn" onclick="deleteUser('${u}')">DELETE</button>
+    </div>`;
+  }).join('');
+}
+
+// Auto-refresh user list every 30 seconds
+setInterval(()=>{
+  if(document.getElementById('dashboard').style.display==='block') renderAll();
+},30000);
+</script>
+</body>
+</html>
